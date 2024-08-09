@@ -1,0 +1,400 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vision Model Comparison - Multiple Prompts</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            clifford: '#da373d',
+                        }
+                    }
+                }
+            }
+        </script>
+        <style type="text/tailwindcss">
+            @layer utilities {
+                .content-auto {
+                    content-visibility: auto;
+                }
+            }
+        </style>
+        <style>
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0,0,0,0.9);
+            }
+            .modal-content {
+                margin: auto;
+                display: block;
+                width: 80%;
+                max-width: 700px;
+            }
+            .close {
+                position: absolute;
+                top: 15px;
+                right: 35px;
+                color: #f1f1f1;
+                font-size: 40px;
+                font-weight: bold;
+                transition: 0.3s;
+            }
+            .close:hover,
+            .close:focus {
+                color: #bbb;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-100">
+        <div class="container mx-auto px-4 py-8">
+            <h1 class="text-4xl font-bold mb-8 text-center text-blue-600">Vision Model Comparison</h1>
+    
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Prompt 1:</h2>
+            <div class="mb-6">
+                <p class="mb-4">What's in this image?</p><div class="flex flex-wrap">
+            <div class="inline-block">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg" alt="Prompt Image" class="max-w-[240px] h-auto rounded-none shadow-lg m-2 cursor-pointer" onclick="openModal(this.src)">
+            </div>
+            </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+            <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="text-xl font-semibold mb-2 text-blue-500">gpt-4-turbo</h3>
+                <div class="mb-4">
+                    <h4 class="font-medium text-gray-700 mb-1">Model Response:</h4>
+                    <p class="text-sm bg-white p-2 rounded">The image shows a beautiful natural landscape featuring a wooden boardwalk that meanders through a lush green grassy field. The field is bordered by scattered trees and bushes, and the sky above is partly cloudy with a soft blue hue, suggesting a serene and peaceful day. The light and shadows play across the field and the path, enhancing the vivid colors and textures of the natural surroundings. This scene is typical of a well-preserved natural park or a conservation area, ideal for walking and enjoying the beauty of nature.</p>
+                </div>
+                <details class="mb-4">
+                    <summary class="cursor-pointer text-sm font-medium text-gray-700">Full API Response</summary>
+                    <pre class="text-xs bg-white p-2 rounded mt-2 overflow-x-auto">{
+  "id": "chatcmpl-9uOb2mRZf8Ys1UkfX4vj2qgBR1sX2",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "The image shows a beautiful natural landscape featuring a wooden boardwalk that meanders through a lush green grassy field. The field is bordered by scattered trees and bushes, and the sky above is partly cloudy with a soft blue hue, suggesting a serene and peaceful day. The light and shadows play across the field and the path, enhancing the vivid colors and textures of the natural surroundings. This scene is typical of a well-preserved natural park or a conservation area, ideal for walking and enjoying the beauty of nature.",
+        "role": "assistant",
+        "function_call": null,
+        "tool_calls": null,
+        "refusal": null
+      }
+    }
+  ],
+  "created": 1723227944,
+  "model": "gpt-4-turbo-2024-04-09",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_3a478acf5e",
+  "usage": {
+    "completion_tokens": 102,
+    "prompt_tokens": 1118,
+    "total_tokens": 1220
+  }
+}</pre>
+                </details>
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-1">Error Details:</h4>
+                    <p class="text-sm text-red-500">N/A</p>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="text-xl font-semibold mb-2 text-blue-500">gpt-4o</h3>
+                <div class="mb-4">
+                    <h4 class="font-medium text-gray-700 mb-1">Model Response:</h4>
+                    <p class="text-sm bg-white p-2 rounded">This is an image depicting a serene nature scene. The foreground features a wooden pathway or boardwalk cutting through a field of tall green grasses. The pathway appears to lead to the distant horizon. The background consists of more fields and scattered trees. The sky is mostly clear with some scattered clouds, contributing to the feeling of openness and tranquility in the scene. The overall atmosphere is bright and sunny, indicating a pleasant day.</p>
+                </div>
+                <details class="mb-4">
+                    <summary class="cursor-pointer text-sm font-medium text-gray-700">Full API Response</summary>
+                    <pre class="text-xs bg-white p-2 rounded mt-2 overflow-x-auto">{
+  "id": "chatcmpl-9uObBTnIhiXsC18W2j1C5XwUNrmkI",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "This is an image depicting a serene nature scene. The foreground features a wooden pathway or boardwalk cutting through a field of tall green grasses. The pathway appears to lead to the distant horizon. The background consists of more fields and scattered trees. The sky is mostly clear with some scattered clouds, contributing to the feeling of openness and tranquility in the scene. The overall atmosphere is bright and sunny, indicating a pleasant day.",
+        "role": "assistant",
+        "function_call": null,
+        "tool_calls": null,
+        "refusal": null
+      }
+    }
+  ],
+  "created": 1723227953,
+  "model": "gpt-4o-2024-05-13",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_c9aa9c0491",
+  "usage": {
+    "completion_tokens": 83,
+    "prompt_tokens": 1117,
+    "total_tokens": 1200
+  }
+}</pre>
+                </details>
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-1">Error Details:</h4>
+                    <p class="text-sm text-red-500">N/A</p>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="text-xl font-semibold mb-2 text-blue-500">gpt-4o-mini</h3>
+                <div class="mb-4">
+                    <h4 class="font-medium text-gray-700 mb-1">Model Response:</h4>
+                    <p class="text-sm bg-white p-2 rounded">The image depicts a serene landscape featuring a wooden pathway winding through a lush green field. The grass on either side of the path is vibrant, and the sky above is filled with soft clouds and a gentle blue hue. This scene suggests a peaceful outdoor setting, likely in a natural park or reserve.</p>
+                </div>
+                <details class="mb-4">
+                    <summary class="cursor-pointer text-sm font-medium text-gray-700">Full API Response</summary>
+                    <pre class="text-xs bg-white p-2 rounded mt-2 overflow-x-auto">{
+  "id": "chatcmpl-9uObIVJX2lEdJTTDGxIMsRO4ngoLP",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "The image depicts a serene landscape featuring a wooden pathway winding through a lush green field. The grass on either side of the path is vibrant, and the sky above is filled with soft clouds and a gentle blue hue. This scene suggests a peaceful outdoor setting, likely in a natural park or reserve.",
+        "role": "assistant",
+        "function_call": null,
+        "tool_calls": null,
+        "refusal": null
+      }
+    }
+  ],
+  "created": 1723227960,
+  "model": "gpt-4o-mini-2024-07-18",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_507c9469a1",
+  "usage": {
+    "completion_tokens": 59,
+    "prompt_tokens": 36847,
+    "total_tokens": 36906
+  }
+}</pre>
+                </details>
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-1">Error Details:</h4>
+                    <p class="text-sm text-red-500">N/A</p>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Prompt 2:</h2>
+            <div class="mb-6">
+                <p class="mb-4">Describe the scene in these pictures. Are there any differences ?</p><div class="flex flex-wrap">
+            <div class="inline-block">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg" alt="Prompt Image" class="max-w-[240px] h-auto rounded-none shadow-lg m-2 cursor-pointer" onclick="openModal(this.src)">
+            </div>
+            
+            <div class="inline-block">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg" alt="Prompt Image" class="max-w-[240px] h-auto rounded-none shadow-lg m-2 cursor-pointer" onclick="openModal(this.src)">
+            </div>
+            </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+            <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="text-xl font-semibold mb-2 text-blue-500">gpt-4-turbo</h3>
+                <div class="mb-4">
+                    <h4 class="font-medium text-gray-700 mb-1">Model Response:</h4>
+                    <p class="text-sm bg-white p-2 rounded">The two pictures depict the same serene nature scene: a wooden walkway leading through a vibrant, lush green meadow with tall grasses and scattered shrubbery under a beautifully cloud-streaked sky. The images are virtually identical and contain the same elements, featuring no noticeable differences between them. The landscape is lit with soft sunlight, suggesting it might be either morning or late afternoon. Both photos capture a sense of tranquility and a deep connection with nature.</p>
+                </div>
+                <details class="mb-4">
+                    <summary class="cursor-pointer text-sm font-medium text-gray-700">Full API Response</summary>
+                    <pre class="text-xs bg-white p-2 rounded mt-2 overflow-x-auto">{
+  "id": "chatcmpl-9uObQkcBamZiPHBP2HmL8Nif6w8o3",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "The two pictures depict the same serene nature scene: a wooden walkway leading through a vibrant, lush green meadow with tall grasses and scattered shrubbery under a beautifully cloud-streaked sky. The images are virtually identical and contain the same elements, featuring no noticeable differences between them. The landscape is lit with soft sunlight, suggesting it might be either morning or late afternoon. Both photos capture a sense of tranquility and a deep connection with nature.",
+        "role": "assistant",
+        "function_call": null,
+        "tool_calls": null,
+        "refusal": null
+      }
+    }
+  ],
+  "created": 1723227968,
+  "model": "gpt-4-turbo-2024-04-09",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_3a478acf5e",
+  "usage": {
+    "completion_tokens": 92,
+    "prompt_tokens": 2229,
+    "total_tokens": 2321
+  }
+}</pre>
+                </details>
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-1">Error Details:</h4>
+                    <p class="text-sm text-red-500">N/A</p>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="text-xl font-semibold mb-2 text-blue-500">gpt-4o</h3>
+                <div class="mb-4">
+                    <h4 class="font-medium text-gray-700 mb-1">Model Response:</h4>
+                    <p class="text-sm bg-white p-2 rounded">The two pictures display a serene landscape featuring:
+
+1. **Sky**: A mostly clear blue sky with some scattered white clouds.
+2. **Pathway**: A wooden boardwalk that stretches straight into the distance.
+3. **Greenery**: Lush green grass on either side of the pathway.
+4. **Background**: Trees and shrubs in the background, adding depth to the scene.
+
+As for differences, there are no visible differences. The scenes in both pictures appear to be identical in every detail, indicating they are likely the same image or duplicate images.</p>
+                </div>
+                <details class="mb-4">
+                    <summary class="cursor-pointer text-sm font-medium text-gray-700">Full API Response</summary>
+                    <pre class="text-xs bg-white p-2 rounded mt-2 overflow-x-auto">{
+  "id": "chatcmpl-9uObZm77ErfnkNnqr89boCzmHshLM",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "The two pictures display a serene landscape featuring:\n\n1. **Sky**: A mostly clear blue sky with some scattered white clouds.\n2. **Pathway**: A wooden boardwalk that stretches straight into the distance.\n3. **Greenery**: Lush green grass on either side of the pathway.\n4. **Background**: Trees and shrubs in the background, adding depth to the scene.\n\nAs for differences, there are no visible differences. The scenes in both pictures appear to be identical in every detail, indicating they are likely the same image or duplicate images.",
+        "role": "assistant",
+        "function_call": null,
+        "tool_calls": null,
+        "refusal": null
+      }
+    }
+  ],
+  "created": 1723227977,
+  "model": "gpt-4o-2024-05-13",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_c9aa9c0491",
+  "usage": {
+    "completion_tokens": 115,
+    "prompt_tokens": 2229,
+    "total_tokens": 2344
+  }
+}</pre>
+                </details>
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-1">Error Details:</h4>
+                    <p class="text-sm text-red-500">N/A</p>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="text-xl font-semibold mb-2 text-blue-500">gpt-4o-mini</h3>
+                <div class="mb-4">
+                    <h4 class="font-medium text-gray-700 mb-1">Model Response:</h4>
+                    <p class="text-sm bg-white p-2 rounded">The two images depict a similar scene featuring a wooden pathway leading through a lush green field under a blue sky with scattered clouds. Both images share the same composition, showcasing the greenery on either side of the path and a hint of trees in the background.
+
+Since they are identical, there are no differences to describe between the two images.</p>
+                </div>
+                <details class="mb-4">
+                    <summary class="cursor-pointer text-sm font-medium text-gray-700">Full API Response</summary>
+                    <pre class="text-xs bg-white p-2 rounded mt-2 overflow-x-auto">{
+  "id": "chatcmpl-9uObh1K9OdFgxbjKQEmO1SnTWbOtw",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "The two images depict a similar scene featuring a wooden pathway leading through a lush green field under a blue sky with scattered clouds. Both images share the same composition, showcasing the greenery on either side of the path and a hint of trees in the background.\n\nSince they are identical, there are no differences to describe between the two images.",
+        "role": "assistant",
+        "function_call": null,
+        "tool_calls": null,
+        "refusal": null
+      }
+    }
+  ],
+  "created": 1723227985,
+  "model": "gpt-4o-mini-2024-07-18",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_507c9469a1",
+  "usage": {
+    "completion_tokens": 66,
+    "prompt_tokens": 73689,
+    "total_tokens": 73755
+  }
+}</pre>
+                </details>
+                <div>
+                    <h4 class="font-medium text-gray-700 mb-1">Error Details:</h4>
+                    <p class="text-sm text-red-500">N/A</p>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+        </div>
+        <div id="imageModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modalImage">
+        </div>
+        <script>
+            function openModal(imageSrc) {
+                var modal = document.getElementById("imageModal");
+                var modalImg = document.getElementById("modalImage");
+                modal.style.display = "block";
+                modal.style.alignContent = "center";
+                modalImg.src = imageSrc;
+            }
+
+            function closeModal() {
+                var modal = document.getElementById("imageModal");
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                var modal = document.getElementById("imageModal");
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', (event) => {
+                document.querySelectorAll('details').forEach((el) => {
+                    el.addEventListener('toggle', (e) => {
+                        if (el.open) {
+                            const preElement = el.querySelector('pre');
+                            if (preElement) {
+                                const codeContent = preElement.textContent;
+                                try {
+                                    const formattedContent = JSON.stringify(JSON.parse(codeContent), null, 2);
+                                    preElement.textContent = formattedContent;
+                                } catch (error) {
+                                    console.error('Error parsing JSON:', error);
+                                }
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+    </html>
+    
