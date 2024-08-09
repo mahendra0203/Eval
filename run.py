@@ -106,7 +106,7 @@ def generate_html_report_tailwind_2(all_results):
     </head>
     <body class="bg-gray-100">
         <div class="container mx-auto px-4 py-8">
-            <h1 class="text-4xl font-bold mb-8 text-center text-blue-600">OpenAI Vision Model Comparison</h1>
+            <h1 class="text-4xl font-bold mb-8 text-center text-blue-600">Vision Model Comparison</h1>
     """
 
     for prompt_index, prompt_result in enumerate(all_results, 1):
@@ -211,10 +211,10 @@ def generate_html_report_tailwind_2(all_results):
     return html_content
 
 def main():
-    parser = argparse.ArgumentParser(description="OpenAI Vision Model Comparison")
+    parser = argparse.ArgumentParser(description="Vision Model Comparison")
     parser.add_argument("--prompts_file", required=True, help="Path to the JSON file containing prompts")
     parser.add_argument("--openai_api_key", required=True, help="OpenAI API Key")
-    parser.add_argument("--output_file", default="vision_model_comparison_report.html", help="Output HTML file name")
+    # parser.add_argument("--output_file", default="vision_model_comparison_report.html", help="Output HTML file name")
     
 
     args = parser.parse_args()
